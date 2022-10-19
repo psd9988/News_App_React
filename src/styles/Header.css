@@ -1,0 +1,28 @@
+.HeaderContainer ul li {
+    list-style: none;
+
+  }
+  
+  .HeaderContainer {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 20%;
+    background-color: rgb(17, 164, 213);
+    width: 100%;
+    color: white;
+    font-size: 14px;
+    position: fixed;
+    top: 0;
+  }
+
+  .HeaderContainer a{
+    text-decoration: none;
+    color: white;
+  }
+
+.nightModeIcon{
+  font-size: 2rem;
+  color: rgb(3, 3, 70);
+  margin: 0 0 0 2rem;
+}

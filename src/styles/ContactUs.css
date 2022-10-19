@@ -1,0 +1,45 @@
+.contactUsContainer{
+    padding: 0 0 0 3%;
+    margin: 10% 0 0 0;
+}
+
+.getInTouchHeading{
+    margin: 0 0 5% 0;
+}
+
+.emailIcon{
+    margin: 0 2% 0 0;
+    font-size: 45px;
+    color: rgb(17, 164, 213);
+}
+.phoneIcon{
+    margin: 0 2% 0 0;
+    font-size: 45px;
+    color: rgb(17, 164, 213);
+}
+
+.emailContainer{
+    margin: 0 0 2% 0;
+    display: flex;
+    align-items: center;
+    color: grey;
+}
+.phoneContainer{
+    margin: 0 0 2% 0;
+    display: flex;
+    align-items: center;
+    color: grey;
+}
+
+.locationContainer{
+    margin: 0 0 5% 0;
+    display: flex;
+    align-items: center;
+    color: grey;
+}
+
+.locationIcon{
+    margin: 0 2% 0 0;
+    font-size: 45px;
+    color: rgb(17, 164, 213);
+}

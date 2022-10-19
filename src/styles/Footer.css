@@ -1,0 +1,15 @@
+.liveTime{
+    text-align: center;
+    color: white;
+    font-weight: bolder;
+}
+
+.FooterContainer{
+    text-align: center;
+    color: red;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+}
+
