@@ -1,15 +1,40 @@
-.liveTime{
-    text-align: center;
-    color: white;
-    font-weight: bolder;
-}
-
 .FooterContainer{
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    background-color: rgb(17, 164, 213);
     color: red;
     bottom: 0;
     left: 0;
     right: 0;
     width: 100%;
+    position: fixed;
+    color: white;
+    font-size: 14px;
+   
+}
+
+
+.DarkFooterContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    background-color: rgb(40, 39, 39);
+    color: red;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    position: fixed;
+    color: white;
+    font-size: 14px;
+}
+
+.liveTime{
+    font-size: 14px;
+    margin-left: 25px;
+    color: aqua;
 }
 

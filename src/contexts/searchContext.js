@@ -3,6 +3,7 @@ import React, { createContext, useState } from "react";
 const SearchStateContext = createContext();
 
 function SearchStateProvider({ children }) {
+  const [isDark, setIsDark] = useState(false);
   const [searchKeyword, setSearchKeyword] = useState('');
   const [isLoading, setIsLoading] = useState(true);
   const [searchedNewsData, setSearchedNewsData] = useState([]);
@@ -15,7 +16,7 @@ function SearchStateProvider({ children }) {
 
 
   return (
-    <SearchStateContext.Provider value={{ searchKeyword, setSearchKeyword, searchedNewsData, setSearchedNewsData, saved, setSaved, isLoading, setIsLoading, likeCounter, setLikeCounter, dislikeCounter, setDislikeCounter, commentsValue, setCommentsValue, displayComments, setDisplayComments}}>
+    <SearchStateContext.Provider value={{ isDark, setIsDark, searchKeyword, setSearchKeyword, searchedNewsData, setSearchedNewsData, saved, setSaved, isLoading, setIsLoading, likeCounter, setLikeCounter, dislikeCounter, setDislikeCounter, commentsValue, setCommentsValue, displayComments, setDisplayComments}}>
       {children}
     </SearchStateContext.Provider>
   );

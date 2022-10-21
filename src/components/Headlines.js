@@ -17,7 +17,7 @@ const Headlines = () => {
 
 
     const [loading, setLoading] = useState(false);
-    const { searchKeyword, setSearchKeyword, searchedNewsData, setSearchedNewsData, saved, setSaved, isLoading, setIsLoading, likeCounter, setLikeCounter, dislikeCounter, setDislikeCounter} = useContext(SearchStateContext);
+    const { searchKeyword, setSearchKeyword, searchedNewsData, setSearchedNewsData, saved, setSaved, isLoading, setIsLoading, likeCounter, setLikeCounter, dislikeCounter, setDislikeCounter, isDark} = useContext(SearchStateContext);
 
     // backup Api:-
 
@@ -119,7 +119,7 @@ const Headlines = () => {
                 <BsArrowUpCircleFill />
             </NavLink>
 
-            <div className="container">
+            <div className= {isDark? 'DarkContainer': 'container'}>
                 {loading ? (
                     <div className="loader-container">
                         <img className='loadingImage' src="https://upload.wikimedia.org/wikipedia/commons/c/c7/Loading_2.gif?20170503175831" />
