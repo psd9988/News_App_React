@@ -8,8 +8,12 @@ import {AiFillLike, AiFillDislike, AiFillDelete} from 'react-icons/ai';
 
 
 const Headlines = () => {
+    
+    let [commentsValue, setCommentsValue] = useState({commentsValue: ''});
+    let [displayComments, setDisplayComments] = useState({displayComments:[]});
+
    
-    let Mycomments = {commentsValue: '', displayComments: []}
+    // let Mycomments = {commentsValue: '', displayComments: []}
 
 
     const [loading, setLoading] = useState(false);
@@ -36,7 +40,8 @@ const Headlines = () => {
     
     useEffect(()=> {
         searchedNewsData.forEach(element => {
-            Object.assign(element, Mycomments)
+            Object.assign(element, commentsValue)
+            Object.assign(element, displayComments)
             Object.assign(element, likeCounter)
             Object.assign(element, dislikeCounter)
             
@@ -101,6 +106,7 @@ const Headlines = () => {
        if(searchedNewsData[id].commentsValue !=''){
         searchedNewsData[id].displayComments.push(searchedNewsData[id].commentsValue)
         console.log(searchedNewsData[id].displayComments)
+        console.log(searchedNewsData)
         
        }
     }
@@ -150,8 +156,8 @@ const Headlines = () => {
                                     </div> 
 
                                     <form onSubmit={handleSubmit} >
-                                       {console.log(item)}
-                                       <input onChange={(e)=> {item.commentsValue = e.target.value}}  type="text" placeholder='Enter Comments' />
+                                      
+                                       <input onChange= {(e)=> setCommentsValue(item.commentsValue=e.target.value)} type="text" placeholder='Enter Comments' />
                                        
                                        <button onClick={(e) => {e.preventDefault()
                                         handleSubmit(index)}}>submit</button>
@@ -159,7 +165,7 @@ const Headlines = () => {
                                        </form>
 
                                        {item.displayComments.map((comment)=>{
-                                        console.log('Prashant')
+                                        
                                         return (<h1>{comment}</h1>)
                                        })}
 
