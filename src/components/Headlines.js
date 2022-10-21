@@ -10,7 +10,7 @@ import {AiFillLike, AiFillDislike, AiFillDelete} from 'react-icons/ai';
 const Headlines = () => {
     
     let [commentsValue, setCommentsValue] = useState({commentsValue: ''});
-    let [displayComments, setDisplayComments] = useState({displayComments:[]});
+    let [displayComments, setDisplayComments] = useState({displayComments:''});
 
    
     // let Mycomments = {commentsValue: '', displayComments: []}
@@ -104,9 +104,9 @@ const Headlines = () => {
 
     const handleSubmit = (id) => {
        if(searchedNewsData[id].commentsValue !=''){
-        searchedNewsData[id].displayComments.push(searchedNewsData[id].commentsValue)
-        console.log(searchedNewsData[id].displayComments)
-        console.log(searchedNewsData)
+        searchedNewsData[id].displayComments = (searchedNewsData[id].commentsValue)
+
+        setCommentsValue(searchedNewsData[id].commentsValue='')
         
        }
     }
@@ -157,17 +157,16 @@ const Headlines = () => {
 
                                     <form onSubmit={handleSubmit} >
                                       
-                                       <input onChange= {(e)=> setCommentsValue(item.commentsValue=e.target.value)} type="text" placeholder='Enter Comments' />
+                                       <input value={item.commentsValue} onChange= {(e)=> setCommentsValue(item.commentsValue=e.target.value)} type="text" placeholder='Enter Comments' />
                                        
                                        <button onClick={(e) => {e.preventDefault()
                                         handleSubmit(index)}}>submit</button>
 
+                                            <p>{item.displayComments}</p>
+
                                        </form>
 
-                                       {item.displayComments.map((comment)=>{
-                                        
-                                        return (<h1>{comment}</h1>)
-                                       })}
+                                     
 
                                  {/* -------------------------------------- */}
 
