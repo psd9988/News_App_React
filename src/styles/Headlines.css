@@ -63,7 +63,7 @@ img{
 }
 
 .likeBtn:hover{
-   color: lightgreen;
+   color: darkgreen;
 }
 .dislikeBtn:hover{
    color: red;

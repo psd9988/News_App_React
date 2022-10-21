@@ -9,10 +9,13 @@ function SearchStateProvider({ children }) {
   const [saved, setSaved] = useState('Headlines');
   const [likeCounter, setLikeCounter] = useState({likeCounter:0});
   const [dislikeCounter, setDislikeCounter] = useState({dislikeCounter:10});
+  const [commentsValue, setCommentsValue] = useState({commentsValue: ''})
+  const [displayComments, setDisplayComments] = useState({commentsValue: ''})
+
 
 
   return (
-    <SearchStateContext.Provider value={{ searchKeyword, setSearchKeyword, searchedNewsData, setSearchedNewsData, saved, setSaved, isLoading, setIsLoading, likeCounter, setLikeCounter, dislikeCounter, setDislikeCounter}}>
+    <SearchStateContext.Provider value={{ searchKeyword, setSearchKeyword, searchedNewsData, setSearchedNewsData, saved, setSaved, isLoading, setIsLoading, likeCounter, setLikeCounter, dislikeCounter, setDislikeCounter, commentsValue, setCommentsValue, displayComments, setDisplayComments}}>
       {children}
     </SearchStateContext.Provider>
   );

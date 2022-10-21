@@ -8,17 +8,18 @@ import {AiFillLike, AiFillDislike, AiFillDelete} from 'react-icons/ai';
 
 
 const Headlines = () => {
+   
+    let Mycomments = {commentsValue: '', displayComments: []}
 
 
     const [loading, setLoading] = useState(false);
-    const { searchKeyword, setSearchKeyword, searchedNewsData, setSearchedNewsData, saved, setSaved, isLoading, setIsLoading, likeCounter, setLikeCounter, dislikeCounter, setDislikeCounter } = useContext(SearchStateContext);
+    const { searchKeyword, setSearchKeyword, searchedNewsData, setSearchedNewsData, saved, setSaved, isLoading, setIsLoading, likeCounter, setLikeCounter, dislikeCounter, setDislikeCounter} = useContext(SearchStateContext);
 
     // backup Api:-
 
     // let url = `https://gnews.io/api/v4/search?q=${saved}&token=e083f268e7ff1c129e0b271bc56d41d1`;
 
     let url = `https://newsapi.org/v2/everything?q=${saved}&apiKey=2402e398703a4b98a120d160f67db765`;
-
 
     // get data from api using axios and save it in state of array:-
 
@@ -28,7 +29,6 @@ const Headlines = () => {
             .then(response => setSearchedNewsData(response.data.articles))
             
     }, [saved]);
-
     
     // -----------------------------------
 
@@ -36,14 +36,13 @@ const Headlines = () => {
     
     useEffect(()=> {
         searchedNewsData.forEach(element => {
+            Object.assign(element, Mycomments)
             Object.assign(element, likeCounter)
             Object.assign(element, dislikeCounter)
             
         })
     }, [searchedNewsData])
     
-    
-
 // ---------------------------------------------------------
 
     // delete functionality:-
@@ -61,29 +60,25 @@ const Headlines = () => {
     // -------------------------
     // like functionality:-
 
-    // const handleLike = (id) => {
-    //     searchedNewsData.filter((item, index) => {
-    //         if (id == index) {
-    //             setLikeCounter((prev)=> prev + 1)
-    //         }
-    //     })
+    const handleLike = (id) => {
+       if(searchedNewsData[id].likeCounter <10){
+        setLikeCounter(searchedNewsData[id].likeCounter+=1)
+       }
        
-    // }
-
+    }
    
     // -------------------------
     // DisLike functionality:-
 
     const handleDisLike = (id) => {
-        searchedNewsData.map((item, index) => {
-            if (id == index) {
-               setDislikeCounter(()=> console.log(dislikeCounter))
-            }
-        })
+        
+      if(searchedNewsData[id].dislikeCounter > 0){
+        setDislikeCounter(searchedNewsData[id].dislikeCounter-=1)
+      }
        
     }
-    // -------------------------
 
+    // -------------------------
     // scroll to top functionality:-
 
     const scrollTop = () => {
@@ -97,7 +92,20 @@ const Headlines = () => {
         }, 2000);
     }, []);
 
+
     // -----------------------------------
+
+    // handle comments onsubmit:-
+
+    const handleSubmit = (id) => {
+       if(searchedNewsData[id].commentsValue !=''){
+        searchedNewsData[id].displayComments.push(searchedNewsData[id].commentsValue)
+        console.log(searchedNewsData[id].displayComments)
+        
+       }
+    }
+
+    // ------------------------------------
 
     return (
         <>
@@ -121,7 +129,7 @@ const Headlines = () => {
                                 <div className='headlineContainer' id={index} key={index}>
                                     <h1>{item.title}</h1>
                                     <p>Published on: {item.publishedAt}</p>
-                                    <img src={item.image} alt="image" />
+                                    <img src={item.urlToImage} alt="image" />
                                     <p>Source: {item.source.name}, {item.source.url}</p>
                                     <p>{item.description}</p>
                                     <button className='readMoreBtn'><a target='_blank' className='readMoreLink' href={item.url}>Read More</a></button>
@@ -129,19 +137,31 @@ const Headlines = () => {
                                 {/* Like Dislike and delete Buttons Container */}
                                     <div className="btnsContainer">
 
-                                    <AiFillLike className='likeDislikeDeleteBtns likeBtn'/>
-                                    <h1 className='counterVariable'></h1>
+                                    <AiFillLike onClick={()=> handleLike(index)} className='likeDislikeDeleteBtns likeBtn'/>
+                                    <h1 className='counterVariable'>{item.likeCounter}</h1>
 
 
                                     <AiFillDislike onClick={() => handleDisLike(index)}   className='likeDislikeDeleteBtns dislikeBtn'/>
-                                    <h1 className='counterVariable'>{dislikeCounter.dislikeCounter}</h1>
+                                    <h1 className='counterVariable'>{item.dislikeCounter}</h1>
 
 
                                     <AiFillDelete onClick={() => handleDelete(index)}  className='likeDislikeDeleteBtns deleteBtn'/>
 
-                                   
-                                    
                                     </div> 
+
+                                    <form onSubmit={handleSubmit} >
+                                       {console.log(item)}
+                                       <input onChange={(e)=> {item.commentsValue = e.target.value}}  type="text" placeholder='Enter Comments' />
+                                       
+                                       <button onClick={(e) => {e.preventDefault()
+                                        handleSubmit(index)}}>submit</button>
+
+                                       </form>
+
+                                       {item.displayComments.map((comment)=>{
+                                        console.log('Prashant')
+                                        return (<h1>{comment}</h1>)
+                                       })}
 
                                  {/* -------------------------------------- */}
 
