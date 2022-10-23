@@ -23,6 +23,8 @@ const Comments = () => {
         setComments(deleteData)
   }
 
+
+
   return (
     <>
     <form onSubmit={handleSubmit}>
@@ -46,7 +48,7 @@ const Comments = () => {
     
       {comments.map((comment, index) => {
         return <div className="commentsContainer" id={index} key={index}>
-        <p className="commentText">{comment}</p>
+        <h6 className="commentText">{comment}</h6>
         <TiDelete className="deleteIcon" onClick={()=>handleDelete(index)}/>
         </div>
       })}

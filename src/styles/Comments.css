@@ -27,6 +27,10 @@
     color: red;
 }
 
+.commentInput{
+    color:rgb(17, 164, 213);
+}
+
 .commentInput:focus{
     outline: rgb(17, 164, 213) solid 1px;
 }
