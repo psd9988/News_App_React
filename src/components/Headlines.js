@@ -5,19 +5,13 @@ import '../styles/Headlines.css'
 import { NavLink } from 'react-router-dom';
 import { BsArrowUpCircleFill } from 'react-icons/bs';
 import {AiFillLike, AiFillDislike, AiFillDelete} from 'react-icons/ai';
+import Comments from './Comments';
 
 
 const Headlines = () => {
     
-    let [commentsValue, setCommentsValue] = useState({commentsValue: ''});
-    let [displayComments, setDisplayComments] = useState({displayComments:''});
-
-   
-    // let Mycomments = {commentsValue: '', displayComments: []}
-
-
     const [loading, setLoading] = useState(false);
-    const { searchKeyword, setSearchKeyword, searchedNewsData, setSearchedNewsData, saved, setSaved, isLoading, setIsLoading, likeCounter, setLikeCounter, dislikeCounter, setDislikeCounter, isDark} = useContext(SearchStateContext);
+    const { searchedNewsData, setSearchedNewsData, saved, likeCounter, setLikeCounter, dislikeCounter, setDislikeCounter, isDark} = useContext(SearchStateContext);
 
     // backup Api:-
 
@@ -40,8 +34,6 @@ const Headlines = () => {
     
     useEffect(()=> {
         searchedNewsData.forEach(element => {
-            Object.assign(element, commentsValue)
-            Object.assign(element, displayComments)
             Object.assign(element, likeCounter)
             Object.assign(element, dislikeCounter)
             
@@ -52,15 +44,11 @@ const Headlines = () => {
 
     // delete functionality:-
 
-    const handleDelete = (id) => {
-        let newArr = []
-        searchedNewsData.filter((item, index) => {
-            if (id != index) {
-                newArr.push(item)
-            }
-        })
-        setSearchedNewsData(newArr)
-    }
+    const handleDelete = (url) => {
+        let deleteData = searchedNewsData.filter((item) => item.url !== url);
+        console.log(deleteData);
+        setSearchedNewsData(deleteData);
+    };
 
     // -------------------------
     // like functionality:-
@@ -77,8 +65,8 @@ const Headlines = () => {
 
     const handleDisLike = (id) => {
         
-      if(searchedNewsData[id].dislikeCounter > 0){
-        setDislikeCounter(searchedNewsData[id].dislikeCounter-=1)
+      if(searchedNewsData[id].dislikeCounter < 10){
+        setDislikeCounter(searchedNewsData[id].dislikeCounter+=1)
       }
        
     }
@@ -99,17 +87,6 @@ const Headlines = () => {
 
 
     // -----------------------------------
-
-    // handle comments onsubmit:-
-
-    const handleSubmit = (id) => {
-       if(searchedNewsData[id].commentsValue !=''){
-        searchedNewsData[id].displayComments = (searchedNewsData[id].commentsValue)
-
-        setCommentsValue(searchedNewsData[id].commentsValue='')
-        
-       }
-    }
 
     // ------------------------------------
 
@@ -132,7 +109,7 @@ const Headlines = () => {
                     {
                         searchedNewsData.map((item, index) => {
                             return (
-                                <div className='headlineContainer' id={index} key={index}>
+                                <div className='headlineContainer' id={index} key={item.url}>
                                     <h1>{item.title}</h1>
                                     <p>Published on: {item.publishedAt}</p>
                                     <img src={item.urlToImage} alt="image" />
@@ -151,20 +128,13 @@ const Headlines = () => {
                                     <h1 className='counterVariable'>{item.dislikeCounter}</h1>
 
 
-                                    <AiFillDelete onClick={() => handleDelete(index)}  className='likeDislikeDeleteBtns deleteBtn'/>
+                                    <AiFillDelete onClick={() => handleDelete(item.url)}  className='likeDislikeDeleteBtns deleteBtn'/>
 
                                     </div> 
+                                    <Comments/>
 
-                                    <form onSubmit={handleSubmit} >
-                                      
-                                       <input value={item.commentsValue} onChange= {(e)=> setCommentsValue(item.commentsValue=e.target.value)} type="text" placeholder='Enter Comments' />
-                                       
-                                       <button onClick={(e) => {e.preventDefault()
-                                        handleSubmit(index)}}>submit</button>
 
-                                            <p>{item.displayComments}</p>
-
-                                       </form>
+                                 
 
                                      
 

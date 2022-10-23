@@ -1,0 +1,36 @@
+.commentsContainer{
+    display: flex;
+    align-items: center;
+   
+}
+
+.comment_btn{
+    background-color: rgb(17, 164, 213);
+    border: none;
+    padding: .2rem 1rem;
+    border-radius: 5%;
+    color: white;
+}
+
+.commentText{
+    color: rgb(17, 164, 213);
+    margin: 1rem 1rem 0 0;
+}
+
+.deleteIcon{
+    margin: 1rem 0 0 0;
+    color: rgb(17, 164, 213);
+    font-size: 30px;
+}
+
+.deleteIcon:hover{
+    color: red;
+}
+
+.commentInput:focus{
+    outline: rgb(17, 164, 213) solid 1px;
+}
+
+.commentInput::placeholder{
+    color: rgb(17, 164, 213);
+}

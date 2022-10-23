@@ -1,31 +1,57 @@
-import React, { useState } from 'react'
+import React, { useState } from "react";
+import '../styles/Comments.css';
+import {TiDelete} from 'react-icons/ti'
 
 const Comments = () => {
+  const [inputComment, setInputComment] = useState("");
+  const [comments, setComments] = useState([]);
 
-    const [commentsValue, setCommentsValue] = useState('')
-    const [displayComments, setDisplayComments] = useState('')
-    const [id, setId] = useState(0)
-   
-
-    const handleSubmit = (e) => {
-        e.preventDefault()
-        setId(prev=>prev+1)
-       if(commentsValue !=''){
-        setDisplayComments([...displayComments,<br/>,commentsValue])
-        setCommentsValue('')
-       }
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    if(inputComment!=''){
+      setComments([...comments, inputComment]);
+      console.log(inputComment);
+      setInputComment("")
     }
+  };
+
+  const handleDelete = (key) => {
+
+    let deleteData = comments.filter((item, index) => index != key)
+        console.log(deleteData)
+
+        setComments(deleteData)
+  }
 
   return (
     <>
-       <form onSubmit={handleSubmit}>
-       <input value={commentsValue} onChange={(e)=>setCommentsValue(e.target.value)}  type="text" placeholder='Enter your comments here'/>
-        <button>Submit</button>
-       </form>
+    <form onSubmit={handleSubmit}>
+      <div>
+        <input
+          
+          type="text"
+          placeholder="Comment here.."
+          value={inputComment}
+          onChange={(e) => {
+            setInputComment(e.target.value);
+          }}
+          className="commentInput"
+        />
+        <button className="comment_btn">
+          Comment
+        </button>
+      </div>
 
-        <h3 key={id}>{displayComments}</h3>
+     </form>
+    
+      {comments.map((comment, index) => {
+        return <div className="commentsContainer" id={index} key={index}>
+        <p className="commentText">{comment}</p>
+        <TiDelete className="deleteIcon" onClick={()=>handleDelete(index)}/>
+        </div>
+      })}
     </>
-  )
-}
+  );
+};
 
-export default Comments
+export default Comments;
