@@ -11,6 +11,7 @@ import Comments from './Comments';
 const Headlines = () => {
     
     const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(false);
     const { searchedNewsData, setSearchedNewsData, saved, likeCounter, setLikeCounter, dislikeCounter, setDislikeCounter, isDark} = useContext(SearchStateContext);
 
     // backup Api:-
@@ -21,12 +22,25 @@ const Headlines = () => {
 
     // get data from api using axios and save it in state of array:-
 
-    useEffect(() => {
-        axios
-            .get(url)
-            .then(response => setSearchedNewsData(response.data.articles))
+    // useEffect(() => {
+    //     axios
+    //         .get(url)
+    //         .then(response => setSearchedNewsData(response.data.articles))
             
-    }, [saved]);
+    // }, [saved]);
+
+    useEffect(() => {
+        const getData = async () => {
+          try {
+            const response = await axios.get(url);
+            setSearchedNewsData(response.data.articles);
+            setError(null);
+          } catch (error) {
+            setError(error.message);
+          } 
+        };
+        getData();
+      }, []);
     
     // -----------------------------------
 
@@ -82,7 +96,7 @@ const Headlines = () => {
         setLoading(true);
         setTimeout(() => {
             setLoading(false);
-        }, 2000);
+        }, 400);
     }, []);
 
 

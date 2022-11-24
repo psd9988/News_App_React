@@ -1,12 +1,16 @@
-import React from 'react';
-import '../styles/ContactUs.css'
-import {MdEmail} from 'react-icons/md'
-import {MdPhoneInTalk} from 'react-icons/md'
-import {MdLocationPin} from 'react-icons/md'
+import React, {useContext} from 'react';
+import { SearchStateContext } from '../contexts/searchContext';
+import {MdLocationPin} from 'react-icons/md';
+import {MdPhoneInTalk} from 'react-icons/md';
+import {MdEmail} from 'react-icons/md';
+import '../styles/ContactUs.css';
 
 const ContactUs = () => {
+
+  const {isDark} = useContext(SearchStateContext);
+
   return (
-    <div className='contactUsContainer'>
+    <div className= {isDark? 'DarkcontactUsContainer': 'contactUsContainer'}>
 
     <div className="getInTouchContainer">
     <h1 className='getInTouchHeading'>Get In Touch With Us</h1>

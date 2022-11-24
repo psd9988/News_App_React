@@ -1,13 +1,15 @@
 import React from 'react';
 import '../styles/About.css';
+import { SearchStateContext } from '../contexts/searchContext';
+import { useContext } from 'react';
 
 
 const About = () => {
 
-
+  const {isDark} = useContext(SearchStateContext);
 
   return (
-    <div className='aboutMainContainer'>
+    <div className= {isDark? 'DarkaboutMainContainer': 'aboutMainContainer'}>
       <h2>Who We Are?</h2>
       <p >
 
