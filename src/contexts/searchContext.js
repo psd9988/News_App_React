@@ -7,7 +7,7 @@ function SearchStateProvider({ children }) {
   const [searchKeyword, setSearchKeyword] = useState('');
   const [isLoading, setIsLoading] = useState(true);
   const [searchedNewsData, setSearchedNewsData] = useState([]);
-  const [saved, setSaved] = useState('Headlines');
+  const [saved, setSaved] = useState('everything');
   const [likeCounter, setLikeCounter] = useState({likeCounter:0});
   const [dislikeCounter, setDislikeCounter] = useState({dislikeCounter:0});
   const [commentsValue, setCommentsValue] = useState({commentsValue: ''})

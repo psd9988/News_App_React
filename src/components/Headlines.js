@@ -18,7 +18,7 @@ const Headlines = () => {
 
     // let url = `https://gnews.io/api/v4/search?q=${saved}&token=e083f268e7ff1c129e0b271bc56d41d1`;
 
-    let url = `https://newsapi.org/v2/everything?q=${saved}&apiKey=2402e398703a4b98a120d160f67db765`;
+    let url = `https://newsapi-z4r7.onrender.com/news?q=${saved}`;
 
     // get data from api using axios and save it in state of array:-
 
@@ -40,7 +40,7 @@ const Headlines = () => {
           } 
         };
         getData();
-      }, []);
+      }, [saved]);
     
     // -----------------------------------
 
